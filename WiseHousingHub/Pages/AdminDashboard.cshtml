@@ -1,0 +1,57 @@
+﻿@page
+@model WiseHousingHub.Pages.AdminDashboardModel
+@{
+}
+
+<h1>Admin Dashboard</h1>
+<hr />
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Image</th>
+			<th>Address</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Lease Type</th>
+			<th>Square Feet</th>
+			<th>Bedrooms</th>
+			<th>Bathrooms</th>
+			<th>Parking Spaces</th>
+			<th>Furnished</th>
+			<th>Wheelchair Accessible</th>
+			<th>Pets Allowed</th>
+			<th>Date Listed</th>
+			<th>Verify</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var item in Model.Properties.Where(prop => !prop.IsVerified))
+		{
+			<tr>
+				<td>@item.Id</td>
+				<td><img src="~/images/@item.ImageFileName" /></td>
+				<td>@item.Address</td>
+				<td>@item.City</td>
+				<td>@item.State</td>
+				<td>@item.Zip</td>
+				<td>@item.Description</td>
+				<td>@item.Price</td>
+				<td>@item.LeaseType</td>
+				<td>@item.SquareFeet</td>
+				<td>@item.Bedrooms</td>
+				<td>@item.Bathrooms</td>
+				<td>@item.ParkingSpaces</td>
+				<td>@(item.Furnished ? "Yes" : "No")</td>
+				<td>@(item.WheelchairAccessible ? "Yes" : "No")</td>
+				<td>@(item.PetsAllowed ? "Yes" : "No")</td>
+				<td>@item.DateListed.ToString("MM-dd-yyyy")</td>
+				<td><button class="btn btn-success">Verify</button></td>
+			</tr>
+		}
+	</tbody>
+</table>

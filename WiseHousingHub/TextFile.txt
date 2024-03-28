@@ -1,0 +1,49 @@
+﻿ modelBuilder.Entity<Landlord>().HasData(
+    new Landlord { Id = 1, Name = "John Doe", Email = "john@example.com", PhoneNumber = "123-456-7890" }
+    new Landlord { Id = 2, Name = "Joe Tester", Email = "joet@aol.com", PhoneNumber = "555-744-3219" }
+    );
+
+modelBuilder.Entity<Product>().HasData(
+    new Product()
+    {
+        Id = 1,
+        Address = "9070 Robinette Cir",
+        City = "Wise",
+        State = "Virginia",
+        Zip = "24293",
+        Description = "Welcome home to this beautiful manufactured 3 bedroom, 3 bathroom well maintained property. The location of this rental offers tons of conveniences. It is located close to restaurants, shopping centers, and schools. This rental looks and smells brand new on the inside. The rental features an open floor plan with the living room, dining room, and kitchen close together.",
+        Price = 650,
+        LeaseType = "1-Year",
+        SquareFeet = 1495,
+        Bedrooms = 3,
+        Bathrooms = 3,
+        ParkingSpaces = 2,
+        Furnished = true,
+        WheelchairAccessible = false,
+        PetsAllowed = false,
+        DateListed = DateTime.Today,
+        ImageFileName = "blue_trailer.jpg",
+        LandlordId = 1
+    },
+    new Product()
+    {
+        Id = 2,
+        Address = "826 NE Hurricane Rd",
+        City = "Wise",
+        State = "Virginia",
+        Zip = "24293",
+        Description = "Check out this Cottage style house with 3 bedroom and 1 bath that has been freshly remodeled. New roof, heat pump and kitchen makes this cozy little home stand out. The refurbished hard wood floors and freshly painted walls makes this rental ready to move right in. Located conveniently close to The University of Virginias College at Wise and within walking distance to downtown Wise. Location!! Location!!! and conveniece makes this the rental for you. And the best part is out the back door just a few steps and cross the small bridge and across the creek you have a perfect place for a firepit.",
+        Price = 650,
+        LeaseType = "6-Month",
+        SquareFeet = 1261,
+        Bedrooms = 3,
+        Bathrooms = 1,
+        ParkingSpaces = 1,
+        Furnished = false,
+        WheelchairAccessible = true,
+        PetsAllowed = true,
+        DateListed = DateTime.Today,
+        ImageFileName = "white_house.jpg",
+        LandlordId = 2
+    }
+    );
