@@ -8,9 +8,11 @@ namespace WiseHousingHub.Pages
     public class MoreDetailsModel : PageModel
     {
         private IPropertyRepository propertyRepo;
-        public MoreDetailsModel(IPropertyRepository propertyRepository)
+        private ILandlordRepository landlordRepo;
+        public MoreDetailsModel(IPropertyRepository propertyRepository, ILandlordRepository landlordRepository)
         {
             this.propertyRepo = propertyRepository;
+            this.landlordRepo = landlordRepository;
         }
 
         [FromRoute]
@@ -18,9 +20,12 @@ namespace WiseHousingHub.Pages
 
         [BindProperty]
         public Property Property { get; set; }
+        
         public void OnGet()
         {
             Property = this.propertyRepo.GetById(Id);
+            Property.Landlord = this.landlordRepo.GetById(Property.LandlordId);
+            
         }
     }
 }

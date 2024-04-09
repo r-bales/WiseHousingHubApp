@@ -1,5 +1,6 @@
 ﻿using WiseHousingHub.Models;
 using Microsoft.EntityFrameworkCore;
+using WiseHousingHub.Data;
 
 namespace WiseHousingHub.Data
 {
