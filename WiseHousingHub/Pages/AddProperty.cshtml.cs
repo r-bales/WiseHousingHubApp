@@ -7,12 +7,12 @@ namespace WiseHousingHub.Pages
 {
     public class AddPropertyModel : PageModel
     {
-        private WiseContext wiseContext;
+        private IPropertyRepository propertyRepo;
         private IWebHostEnvironment webEnv;
 
-        public AddPropertyModel(WiseContext wiseContext, IWebHostEnvironment environment)
+        public AddPropertyModel(IPropertyRepository propertyRepository, IWebHostEnvironment environment)
         {
-            this.wiseContext = wiseContext;
+            this.propertyRepo = propertyRepository;
             this.webEnv = environment;
         }
 
@@ -37,8 +37,7 @@ namespace WiseHousingHub.Pages
                 }
             }
             NewProperty.DateListed = DateTime.Now;
-            this.wiseContext.Properties.Add(NewProperty);
-            this.wiseContext.SaveChanges();
+            this.propertyRepo.Add(NewProperty);
 
             return RedirectToPage("Index");
         }
