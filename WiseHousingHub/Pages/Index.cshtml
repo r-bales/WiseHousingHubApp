@@ -10,13 +10,21 @@
 </div>
 
 <div class="row">
-    @foreach (var property in Model.Properties)
+    @foreach (var property in Model.Properties.Where(prop => prop.IsVerified))
     {
         <div class="col-md-6 mb-4">
             <div class="card custom-card">
-                <img src="~/images/@property.ImageFileName" />
+                <img src="~/images/@property.ImageFileName"/>
                 <div class="card-body">
-                    <h5 class="card-title">@($"{property.Address}, {property.City}, {property.State} {property.Zip}")</h5>
+                    <h5 class="card-title" style="margin-bottom: 20px;">@($"{property.Address}, {property.City}, {property.State} {property.Zip}")</h5>
+                    <ul>
+                        <li><p>Lease Type: @property.LeaseType</p></li>
+                        <li><p>Price Per Month: @($"${property.Price}")</p></li>
+                        <li><p>Number of Bedrooms: @property.Bedrooms</p></li>
+                        <li><p>Number of Bathrooms: @property.Bathrooms</p></li>
+                        <li><p>Square Feet: @property.SquareFeet</p></li>
+                    </ul>
+                    <a class="btn btn-success" role="button" asp-page="MoreDetails" asp-route-id="@property.Id" style=" margin-top: 20px;">More Details</a>
                 </div>
             </div>
         </div>

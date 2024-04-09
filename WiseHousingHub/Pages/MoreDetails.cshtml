@@ -1,0 +1,15 @@
+﻿@page "moredetails/{id:int}"
+@model WiseHousingHub.Pages.MoreDetailsModel
+@{
+}
+
+<h1>Details for Property @RouteData.Values["id"]</h1>
+<hr />
+
+<div>
+	<p>@Model.Property.Address</p>
+	<p>@Model.Property.Description</p>
+	<p>@Model.Property.Price</p>
+	<p>@Model.Property.LeaseType</p>
+	<p>@Model.Property.SquareFeet</p>
+</div>

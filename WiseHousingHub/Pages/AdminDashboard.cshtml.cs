@@ -29,5 +29,16 @@ namespace WiseHousingHub.Pages
             }
             return RedirectToPage();
         }
-    }
+		public async Task<IActionResult> OnPostUnverify(int id)
+		{
+			var property = propertyRepo.GetById(id);
+
+			if (property != null)
+			{
+				property.IsVerified = false;
+				propertyRepo.Update(property);
+			}
+			return RedirectToPage();
+		}
+	}
 }
