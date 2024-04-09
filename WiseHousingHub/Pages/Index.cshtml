@@ -8,3 +8,17 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="row">
+    @foreach (var property in Model.Properties)
+    {
+        <div class="col-md-6 mb-4">
+            <div class="card custom-card">
+                <img src="~/images/@property.ImageFileName" />
+                <div class="card-body">
+                    <h5 class="card-title">@($"{property.Address}, {property.City}, {property.State} {property.Zip}")</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
