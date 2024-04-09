@@ -92,3 +92,7 @@ table img {
 form img {
     max-width: 350px;
 }
+
+.custom-card {
+    margin-bottom: 20px;
+}
