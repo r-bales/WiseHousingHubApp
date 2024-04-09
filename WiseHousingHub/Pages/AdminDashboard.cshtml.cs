@@ -18,5 +18,16 @@ namespace WiseHousingHub.Pages
         {
             Properties = propertyRepo.GetAll();
         }
+        public async Task<IActionResult> OnPostVerify(int id)
+        {
+            var property = propertyRepo.GetById(id);
+
+            if (property != null)
+            {
+                property.IsVerified = true;
+                propertyRepo.Update(property);
+            }
+            return RedirectToPage();
+        }
     }
 }
