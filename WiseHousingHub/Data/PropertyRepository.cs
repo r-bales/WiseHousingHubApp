@@ -1,4 +1,5 @@
 ﻿using WiseHousingHub.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WiseHousingHub.Data
 {
@@ -12,7 +13,8 @@ namespace WiseHousingHub.Data
         }
         public void Add(Property property)
         {
-            throw new NotImplementedException();
+            this.wiseContext.Properties.Add(property);
+            this.wiseContext.SaveChanges();
         }
 
         public void Delete(int id)
@@ -27,12 +29,13 @@ namespace WiseHousingHub.Data
 
         public Property GetById(int id)
         {
-            throw new NotImplementedException();
+            return wiseContext.Properties.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Property property)
         {
-            throw new NotImplementedException();
+            wiseContext.Entry(property).State = EntityState.Modified;
+            wiseContext.SaveChanges();
         }
     }
 }

@@ -1,0 +1,106 @@
+﻿@page "/properties/edit/{id:int}"
+@model WiseHousingHub.Pages.EditPropertyModel
+@{
+}
+
+<h1>Edit Property @RouteData.Values["id"]</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All"></div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Address">Address</label>
+                <input asp-for="EditProperty.Address" class="form-control" />
+                <span asp-validation-for="EditProperty.Address"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.City">City</label>
+                <input asp-for="EditProperty.City" class="form-control" />
+                <span asp-validation-for="EditProperty.City"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.State">State</label>
+                <input asp-for="EditProperty.State" class="form-control" />
+                <span asp-validation-for="EditProperty.State"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Zip">Zip</label>
+                <input asp-for="EditProperty.Zip" class="form-control" />
+                <span asp-validation-for="EditProperty.Zip"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Description">Description</label>
+                <textarea asp-for="EditProperty.Description" class="form-control"></textarea>
+                <span asp-validation-for="EditProperty.Description"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Price">Price</label>
+                <input asp-for="EditProperty.Price" class="form-control" />
+                <span asp-validation-for="EditProperty.Price"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.LeaseType">Type of Lease</label>
+                <select asp-for="EditProperty.LeaseType" class="form-control">
+                    <option value="6-Month">6-Month</option>
+                    <option value="1-Year">1-Year</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.SquareFeet">Square Feet</label>
+                <input asp-for="EditProperty.SquareFeet" class="form-control" />
+                <span asp-validation-for="EditProperty.SquareFeet"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Bedrooms">Number of Bedrooms</label>
+                <input asp-for="EditProperty.Bedrooms" class="form-control" />
+                <span asp-validation-for="EditProperty.Bedrooms"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Bathrooms">Number of Bathrooms</label>
+                <input asp-for="EditProperty.Bathrooms" class="form-control" />
+                <span asp-validation-for="EditProperty.Bathrooms"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.ParkingSpaces">Number of Parking Spaces</label>
+                <input asp-for="EditProperty.ParkingSpaces" class="form-control" />
+                <span asp-validation-for="EditProperty.ParkingSpaces"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Furnished">Is the Property Furnished?</label>
+                <select asp-for="EditProperty.Furnished" class="form-control">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.WheelchairAccessible">Is the Property Wheelchair Accessible?</label>
+                <select asp-for="EditProperty.WheelchairAccessible" class="form-control">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.PetsAllowed">Are Pets Allowed?</label>
+                <select asp-for="EditProperty.PetsAllowed" class="form-control">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.LandlordId">Landlord ID</label>
+                <input asp-for="EditProperty.LandlordId" class="form-control" />
+                <span asp-validation-for="EditProperty.LandlordId"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="EditProperty.Upload">Image</label>
+                <input asp-for="EditProperty.Upload" class="form-control" />
+            </div>
+
+            <button class="btn btn-success">Submit</button>
+        </form>
+
+
+    </div>
+</div>
