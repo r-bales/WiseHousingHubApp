@@ -38,6 +38,7 @@ namespace WiseHousingHub.Models
         public bool PetsAllowed { get; set; }
         public DateTime DateListed { get; set; }
         public string ImageFileName { get; set; }
+
         [NotMapped]
         public IFormFile Upload { get; set; }
         [Required]

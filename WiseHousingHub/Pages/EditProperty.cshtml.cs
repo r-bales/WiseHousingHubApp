@@ -26,7 +26,7 @@ namespace WiseHousingHub.Pages
             EditProperty = this.propertyRepo.GetById(Id);
         }
 
-        public async Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostEdit()
         {
             if (ModelState.IsValid) { return Page(); }
 
@@ -44,8 +44,14 @@ namespace WiseHousingHub.Pages
             EditProperty.Id = Id;
             this.propertyRepo.Update(EditProperty);
 
+            return RedirectToPage("AdminDashboard"); 
+        }
+
+        public IActionResult OnPostDelete()
+        {
+            this.propertyRepo.Delete(Id);
+
             return RedirectToPage("AdminDashboard");
-            
         }
     }
 }
