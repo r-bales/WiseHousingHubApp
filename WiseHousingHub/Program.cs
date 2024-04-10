@@ -9,6 +9,7 @@ builder.Services.AddDbContext<WiseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WiseHousingHub")));
 
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
+builder.Services.AddScoped<ILandlordRepository, LandlordRepository>();
 
 var app = builder.Build();
 
