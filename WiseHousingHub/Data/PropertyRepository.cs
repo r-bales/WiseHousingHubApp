@@ -12,6 +12,7 @@ namespace WiseHousingHub.Data
         {
             this.wiseContext = context;
         }
+
         public void Add(Property property)
         {
             this.wiseContext.Properties.Add(property);

@@ -13,6 +13,17 @@ namespace WiseHousingHub.Data
             this.wiseContext = context;
         }
 
+        public void Add(Landlord landlord)
+        {
+            this.wiseContext.Landlords.Add(landlord);
+            this.wiseContext.SaveChanges();
+        }
+        
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Landlord> GetAll()
         {
             return wiseContext.Landlords.ToList();
@@ -21,6 +32,12 @@ namespace WiseHousingHub.Data
         public Landlord GetById(int id)
         {
             return wiseContext.Landlords.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Update(Landlord landlord)
+        {
+            wiseContext.Entry(landlord).State = EntityState.Modified;
+            wiseContext.SaveChanges();
         }
     }
 }
