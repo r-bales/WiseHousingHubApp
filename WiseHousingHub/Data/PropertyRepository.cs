@@ -21,7 +21,9 @@ namespace WiseHousingHub.Data
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var deleteItem = wiseContext.Properties.First(x => x.Id == id);
+            wiseContext.Properties.Remove(deleteItem);
+            wiseContext.SaveChanges();
         }
 
         public List<Property> GetAll()
