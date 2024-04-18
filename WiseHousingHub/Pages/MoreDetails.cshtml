@@ -1,20 +1,47 @@
-﻿@page "moredetails/{id:int}"
+﻿@page "{id:int}"
 @model WiseHousingHub.Pages.MoreDetailsModel
 @{
 }
 
-<h1>Details for Property @RouteData.Values["id"]</h1>
+<style>
+    .fa {
+        margin-right: 5px;
+    }
+</style>
+
+<h1>Details for @($"{Model.Property.Address}, {Model.Property.City}, {Model.Property.State} {Model.Property.Zip}")</h1>
 <hr />
 
-<div>
-	<p>@Model.Property.Address</p>
-	<p>@Model.Property.Description</p>
-	<p>@Model.Property.Price</p>
-	<p>@Model.Property.LeaseType</p>
-	<p>@Model.Property.SquareFeet</p>
-	<p>@Model.Property.Landlord.Id</p>
-	<p>@Model.Property.Landlord.FirstName</p>
-	<p>@Model.Property.Landlord.LastName</p>
-	<p>@Model.Property.Landlord.Email</p>
-	<p>@Model.Property.Landlord.PhoneNumber</p>
+<div class="row" style="margin-top: 20px;">
+    <div class="col-md-6">
+        <!-- Image column -->
+        <img src="~/images/@Model.Property.ImageFileName" class="img-fluid" />
+    </div>
+    <div class="col-md-6">
+        <!-- Information column -->
+        <p>@Model.Property.Description</p>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- First subcolumn -->
+                <p><i class="fa fa-fw fa-usd" ></i>Price: @Model.Property.Price</p>
+                <p><i class="fa fa-fw fa-pencil-square-o"></i>Lease Type: @Model.Property.LeaseType</p>
+                <p><i class="fa fa-fw fa-ruler"></i>Square Feet: @Model.Property.SquareFeet</p>
+                <p><i class="fa fa-fw fa-bed"></i>Bedrooms: @Model.Property.Bedrooms</p>
+                <p><i class="fa fa-fw fa-bath"></i>Bathrooms: @Model.Property.Bathrooms</p>
+                <p><i class="fa fa-fw fa-car"></i>Parking Spaces: @Model.Property.ParkingSpaces</p>
+                <p><i class="fa fa-fw fa-couch"></i>Furnished: @(Model.Property.Furnished ? "Yes" : "No")</p>
+                
+            </div>
+            <div class="col-md-6">
+                <!-- Second subcolumn -->
+                <p><i class="fa fa-fw fa-wheelchair"></i>Wheelchair Accessible: @(Model.Property.WheelchairAccessible ? "Yes" : "No")</p>
+                <p><i class="fa fa-fw fa-paw"></i>Pets Allowed: @(Model.Property.PetsAllowed ? "Yes" : "No")</p>
+                <p><i class="fa fa-fw fa-calendar"></i>Date Listed: @Model.Property.DateListed.ToShortDateString()</p>
+                <p><i class="fa fa-fw fa-user"></i> Landlord Name: @($"{Model.Property.Landlord.FirstName} {Model.Property.Landlord.LastName}")</p>
+                <p><i class="fa fa-fw fa-envelope"></i>Email: @Model.Property.Landlord.Email</p>
+                <p><i class="fa fa-fw fa-phone"></i>Phone Number: @Model.Property.Landlord.PhoneNumber</p>
+            </div>
+        </div>
+    </div>
 </div>
+
