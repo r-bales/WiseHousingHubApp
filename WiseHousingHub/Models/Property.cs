@@ -36,13 +36,14 @@ namespace WiseHousingHub.Models
         public bool WheelchairAccessible { get; set; }
         [Required]
         public bool PetsAllowed { get; set; }
+        [Required]
+        public int LandlordId { get; set; }
         public DateTime DateListed { get; set; }
         public string ImageFileName { get; set; }
 
         [NotMapped]
         public IFormFile Upload { get; set; }
-        [Required]
-        public int LandlordId { get; set; }
+        
         public Landlord Landlord { get; set; }
         public bool IsVerified { get; set; } = false;
 
