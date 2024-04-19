@@ -97,6 +97,10 @@ form img {
     margin-bottom: 20px;
 }
 
+.desc-col {
+    min-width: 200px;
+}
+
 .fa {
-    margin-right: 5px;
+    margin-right: 7px;
 }
