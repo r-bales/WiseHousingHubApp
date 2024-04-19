@@ -1,6 +1,7 @@
 ﻿@page "{id:int}"
 @model WiseHousingHub.Pages.LandlordDashboardModel
 @{
+	ViewData["Title"] = "Landlord Dashboard";
 }
 
 <h1>Welcome, @($"{Model.Landlord.FirstName} {Model.Landlord.LastName}")</h1>
