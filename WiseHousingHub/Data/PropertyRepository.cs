@@ -36,6 +36,11 @@ namespace WiseHousingHub.Data
             return wiseContext.Properties.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Property> GetPropertiesByLandlordId(int landlordId)
+        {
+            return wiseContext.Properties.Where(p => p.LandlordId == landlordId).ToList();
+        }
+
         public void Update(Property property)
         {
             wiseContext.Entry(property).State = EntityState.Modified;

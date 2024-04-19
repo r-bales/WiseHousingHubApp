@@ -1,6 +1,7 @@
-﻿@page "/properties/edit/{id:int}"
+﻿@page "{id:int}"
 @model WiseHousingHub.Pages.EditPropertyModel
 @{
+    ViewData["Title"] = "Edit Property";
 }
 
 <h1>Edit Property @RouteData.Values["id"]</h1>
