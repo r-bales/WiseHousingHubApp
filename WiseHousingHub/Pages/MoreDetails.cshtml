@@ -5,26 +5,26 @@
 
 <style>
     .fa {
-        margin-right: 5px;
+        margin-right: 7px;
     }
 </style>
 
 <h1>Details for @($"{Model.Property.Address}, {Model.Property.City}, {Model.Property.State} {Model.Property.Zip}")</h1>
 <hr />
 
-<div class="row" style="margin-top: 20px;">
+<div class="row">
     <div class="col-md-6">
         <!-- Image column -->
-        <img src="~/images/@Model.Property.ImageFileName" class="img-fluid" />
+        <img src="~/images/@Model.Property.ImageFileName" class="img-fluid" style="margin-top: 20px;"/>
     </div>
     <div class="col-md-6">
         <!-- Information column -->
-        <p>@Model.Property.Description</p>
+        <p style="margin-top: 20px;">@Model.Property.Description</p>
         <div class="row">
             <div class="col-md-6">
                 <!-- First subcolumn -->
                 <p><i class="fa fa-fw fa-usd" ></i>Price: @Model.Property.Price</p>
-                <p><i class="fa fa-fw fa-pencil-square-o"></i>Lease Type: @Model.Property.LeaseType</p>
+                <p><i class="fa fa-fw fa-file-signature"></i>Lease Type: @Model.Property.LeaseType</p>
                 <p><i class="fa fa-fw fa-ruler"></i>Square Feet: @Model.Property.SquareFeet</p>
                 <p><i class="fa fa-fw fa-bed"></i>Bedrooms: @Model.Property.Bedrooms</p>
                 <p><i class="fa fa-fw fa-bath"></i>Bathrooms: @Model.Property.Bathrooms</p>
