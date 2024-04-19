@@ -16,7 +16,7 @@ namespace WiseHousingHub.Models
         [Required]
         public string Zip { get; set; }
         [Required]
-        [MaxLength(500)]
+        [MaxLength(1000)]
         public string Description { get; set; }
         [Required]
         public decimal Price { get; set; }
