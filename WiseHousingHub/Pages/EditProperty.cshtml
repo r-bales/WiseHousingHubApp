@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit Property";
 }
 
-<h1>Edit Property @RouteData.Values["id"]</h1>
+<h1>Edit @($"{Model.EditProperty.Address}, {Model.EditProperty.City}, {Model.EditProperty.State} {Model.EditProperty.Zip}")</h1>
 <hr />
 
 <div class="row">

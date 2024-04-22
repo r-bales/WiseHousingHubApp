@@ -1,13 +1,16 @@
-﻿using WiseHousingHub.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using WiseHousingHub.Models;
 
 namespace WiseHousingHub.Data
 {
-	public interface ILandlordRepository
-	{
-		public void Add(Landlord landlord);
-		public void Update(Landlord landlord);
-		public Landlord GetById(int id);
-		public List<Landlord> GetAll();
-		public void Delete(int id);
-	}
+    public interface ILandlordRepository
+    {
+        Task AddAsync(ApplicationUser user);
+        Task DeleteAsync(string userId);
+        Task<List<ApplicationUser>> GetAllAsync();
+        Task<ApplicationUser> GetByIdAsync(string userId);
+        Task UpdateAsync(ApplicationUser user);
+    }
 }
+

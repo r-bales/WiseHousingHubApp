@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WiseHousingHub.Data;
@@ -5,6 +6,7 @@ using WiseHousingHub.Models;
 
 namespace WiseHousingHub.Pages
 {
+    [Authorize(Roles = "admin")]
     public class AdminDashboardModel : PageModel
     {
         private IPropertyRepository propertyRepo;

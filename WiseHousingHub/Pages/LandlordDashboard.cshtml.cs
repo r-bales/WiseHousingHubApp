@@ -17,14 +17,14 @@ namespace WiseHousingHub.Pages
         }
 
         [FromRoute]
-        public int Id { get; set; }
+        public string userId { get; set; }
 
         [BindProperty]
-        public Landlord Landlord { get; set; }
-        public void OnGet()
+        public ApplicationUser Landlord { get; set; }
+        public async Task OnGetAsync()
         {
-            Landlord = this.landlordRepo.GetById(Id);
-            var properties = this.propertyRepo.GetPropertiesByLandlordId(Id);
+            Landlord = await landlordRepo.GetByIdAsync(userId);
+            var properties = this.propertyRepo.GetPropertiesByLandlordId(userId);
 
             foreach (var property in properties)
             {

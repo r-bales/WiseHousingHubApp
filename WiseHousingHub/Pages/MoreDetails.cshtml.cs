@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WiseHousingHub.Data;
 using WiseHousingHub.Models;
+using System.Threading.Tasks;
 
 namespace WiseHousingHub.Pages
 {
@@ -21,10 +22,10 @@ namespace WiseHousingHub.Pages
         [BindProperty]
         public Property Property { get; set; }
         
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             Property = this.propertyRepo.GetById(Id);
-            Property.Landlord = this.landlordRepo.GetById(Property.LandlordId);
+            Property.Landlord = await landlordRepo.GetByIdAsync(Property.LandlordId);
             
         }
     }
