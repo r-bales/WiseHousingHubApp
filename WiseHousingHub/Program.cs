@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WiseHousingHub.Data;
+using Microsoft.AspNetCore.Identity;
+using WiseHousingHub.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<WiseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WiseHousingHub")));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<WiseContext>();
 
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<ILandlordRepository, LandlordRepository>();

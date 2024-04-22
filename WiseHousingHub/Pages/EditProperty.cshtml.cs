@@ -42,16 +42,17 @@ namespace WiseHousingHub.Pages
             }
             EditProperty.DateListed = DateTime.Now;
             EditProperty.Id = Id;
+
             this.propertyRepo.Update(EditProperty);
 
-            return RedirectToPage("AdminDashboard"); 
+            return RedirectToPage("Index"); 
         }
 
         public IActionResult OnPostDelete()
         {
             this.propertyRepo.Delete(Id);
 
-            return RedirectToPage("AdminDashboard");
+            return RedirectToPage("Index");
         }
     }
 }

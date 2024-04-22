@@ -1,45 +1,51 @@
 ﻿using WiseHousingHub.Models;
 using Microsoft.EntityFrameworkCore;
 using WiseHousingHub.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WiseHousingHub.Data
 {
     public class LandlordRepository : ILandlordRepository
     {
-        private WiseContext wiseContext;
+        private readonly WiseContext wiseContext;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public LandlordRepository(WiseContext context)
+        public LandlordRepository(WiseContext context, UserManager<ApplicationUser> userManager)
         {
             this.wiseContext = context;
+            this.userManager = userManager;
         }
 
-        public void Add(Landlord landlord)
+        public async Task AddAsync(ApplicationUser user)
         {
-            this.wiseContext.Landlords.Add(landlord);
-            this.wiseContext.SaveChanges();
-        }
-        
-        public void Delete(int id)
-        {
-            var deleteItem = wiseContext.Landlords.First(x => x.Id == id);
-            wiseContext.Landlords.Remove(deleteItem);
-            wiseContext.SaveChanges();
+            await userManager.CreateAsync(user);
         }
 
-        public List<Landlord> GetAll()
+        public async Task DeleteAsync(string userId)
         {
-            return wiseContext.Landlords.ToList();
+            var user = await userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                await userManager.DeleteAsync(user);
+            }
         }
 
-        public Landlord GetById(int id)
+        public async Task<List<ApplicationUser>> GetAllAsync()
         {
-            return wiseContext.Landlords.FirstOrDefault(x => x.Id == id);
+            return await userManager.Users.ToListAsync();
         }
 
-        public void Update(Landlord landlord)
+        public async Task<ApplicationUser> GetByIdAsync(string userId)
         {
-            wiseContext.Entry(landlord).State = EntityState.Modified;
-            wiseContext.SaveChanges();
+            return await userManager.FindByIdAsync(userId);
+        }
+
+        public async Task UpdateAsync(ApplicationUser user)
+        {
+            await userManager.UpdateAsync(user);
         }
     }
 }
+

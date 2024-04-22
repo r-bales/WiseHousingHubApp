@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WiseHousingHub.Data;
@@ -9,11 +10,14 @@ namespace WiseHousingHub.Pages
     {
         private IPropertyRepository propertyRepo;
         private IWebHostEnvironment webEnv;
+        private UserManager<ApplicationUser> usrMan;
 
-        public AddPropertyModel(IPropertyRepository propertyRepository, IWebHostEnvironment environment)
+        public AddPropertyModel(IPropertyRepository propertyRepository, IWebHostEnvironment environment,
+            UserManager<ApplicationUser> usrManager)
         {
             this.propertyRepo = propertyRepository;
             this.webEnv = environment;
+            this.usrMan = usrManager;
         }
 
         [BindProperty]
@@ -25,6 +29,14 @@ namespace WiseHousingHub.Pages
         public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid) { return Page(); }
+
+            ApplicationUser user = await usrMan.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+
+            NewProperty.LandlordId = user.Id;
 
             if (NewProperty.Upload is not null)
             {

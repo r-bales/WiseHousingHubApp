@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using System.Reflection.Emit;
 using WiseHousingHub.Models;
 
 namespace WiseHousingHub.Data
 {
-    public class WiseContext : DbContext
+    public class WiseContext : IdentityDbContext<ApplicationUser>
     {
         public WiseContext(DbContextOptions options) : base(options) { }
         public DbSet<Property> Properties { get; set; }
@@ -13,17 +15,84 @@ namespace WiseHousingHub.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            var admin = new IdentityRole("admin");
+            admin.NormalizedName = "admin";
+
+            var user = new IdentityRole("user");
+            user.NormalizedName = "user";
+
+            modelBuilder.Entity<IdentityRole>().HasData(admin, user);
+
             modelBuilder.Entity<Property>()
                 .HasOne(p => p.Landlord)
                 .WithMany(l => l.Properties)
                 .HasForeignKey(p => p.LandlordId)
-                .IsRequired();
+                .IsRequired(false);
 
-            modelBuilder.Entity<Landlord>().HasData(
-                new Landlord() { Id = 1, FirstName = "John", LastName = "Doe", Email = "john@example.com", PhoneNumber = "123-456-7890" },
-                new Landlord() { Id = 2, FirstName = "Joe", LastName = "Tester", Email = "joet@aol.com", PhoneNumber = "555-744-3219" },
-                new Landlord() { Id = 3, FirstName = "Jane", LastName = "Smith", Email = "janesmith10@gmail.com", PhoneNumber = "713-210-1921" }
-                );
+            // Seed user data
+            var adminUser = new ApplicationUser
+            {
+                UserName = "admin@wisehousinghub.com",
+                Email = "admin@wisehousinghub.com",
+                NormalizedUserName = "ADMIN@WISEHOUSINGHUB.COM",
+                NormalizedEmail = "ADMIN@WISEHOUSINGHUB.COM",
+                FirstName = "Joe",
+                LastName = "Tester"
+            };
+            var adminPasswordHasher = new PasswordHasher<ApplicationUser>();
+            adminUser.PasswordHash = adminPasswordHasher.HashPassword(adminUser, "P@ssword1");
+            modelBuilder.Entity<ApplicationUser>().HasData(adminUser);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = admin.Id,
+                UserId = adminUser.Id
+            });
+
+
+            var user1 = new ApplicationUser
+            {
+                UserName = "johndoe@aol.com",
+                Email = "johndoe@aol.com",
+                NormalizedUserName = "JOHNDOE@AOL.COM",
+                NormalizedEmail = "JOHNDOE@AOL.COM",
+                FirstName = "John",
+                LastName = "Doe",
+                PhoneNumber = "123-456-7890"
+            };
+            var user1PasswordHasher = new PasswordHasher<ApplicationUser>();
+            user1.PasswordHash = user1PasswordHasher.HashPassword(user1, "P@ssword1");
+            modelBuilder.Entity<ApplicationUser>().HasData(user1);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = user.Id,
+                UserId = user1.Id
+            });
+
+
+            var user2 = new ApplicationUser
+            {
+                UserName = "janesmith@gmail.com",
+                Email = "janesmith@gmail.com",
+                NormalizedUserName = "JANESMITH@GMAIL.COM",
+                NormalizedEmail = "JANESMITH@GMAIL.COM",
+                FirstName = "Jane",
+                LastName = "Smith",
+                PhoneNumber = "713-210-1921"
+            };
+            var user2PasswordHasher = new PasswordHasher<ApplicationUser>();
+            user2.PasswordHash = user2PasswordHasher.HashPassword(user2, "P@ssword1");
+            modelBuilder.Entity<ApplicationUser>().HasData(user2);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = user.Id,
+                UserId = user2.Id
+            });
+
 
             modelBuilder.Entity<Property>().HasData(
                 new Property()
@@ -45,7 +114,7 @@ namespace WiseHousingHub.Data
                     PetsAllowed = false,
                     DateListed = DateTime.Today,
                     ImageFileName = "blue_trailer.jpg",
-                    LandlordId = 1,
+                    LandlordId = user1.Id,
                     IsVerified = true,
                 },
                 new Property()
@@ -67,7 +136,7 @@ namespace WiseHousingHub.Data
                     PetsAllowed = true,
                     DateListed = DateTime.Today,
                     ImageFileName = "green_house.jpg",
-                    LandlordId = 2,
+                    LandlordId = user2.Id,
                     IsVerified = true,
                 },
                 new Property()
@@ -89,7 +158,7 @@ namespace WiseHousingHub.Data
                     PetsAllowed = true,
                     DateListed = DateTime.Today,
                     ImageFileName = "white_house.jpg",
-                    LandlordId = 2,
+                    LandlordId = user2.Id,
                     IsVerified = true,
                 },
                 new Property()
@@ -111,7 +180,7 @@ namespace WiseHousingHub.Data
                     PetsAllowed = true,
                     DateListed = DateTime.Today,
                     ImageFileName = "tan_doublewide.jpg",
-                    LandlordId = 1,
+                    LandlordId = user1.Id,
                     IsVerified = true,
 				}
                 );
