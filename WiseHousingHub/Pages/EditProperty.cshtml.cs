@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WiseHousingHub.Data;
@@ -11,11 +12,14 @@ namespace WiseHousingHub.Pages
     {
         private IPropertyRepository propertyRepo;
         private IWebHostEnvironment webEnv;
+        private UserManager<ApplicationUser> usrMan;
 
-        public EditPropertyModel(IPropertyRepository propertyRepository, IWebHostEnvironment environment)
+        public EditPropertyModel(IPropertyRepository propertyRepository, IWebHostEnvironment environment,
+            UserManager<ApplicationUser> usrManager)
         {
             this.propertyRepo = propertyRepository;
             this.webEnv = environment;
+            this.usrMan = usrManager;
         }
 
         [FromRoute]
@@ -31,6 +35,13 @@ namespace WiseHousingHub.Pages
         public async Task<IActionResult> OnPostEdit()
         {
             if (ModelState.IsValid) { return Page(); }
+
+            ApplicationUser user = await usrMan.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+            EditProperty.LandlordId = user.Id;
 
             if (EditProperty.Upload is not null)
             {
