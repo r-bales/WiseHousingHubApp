@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,6 +7,7 @@ using WiseHousingHub.Models;
 
 namespace WiseHousingHub.Pages
 {
+    [Authorize]
     public class AddPropertyModel : PageModel
     {
         private IPropertyRepository propertyRepo;
