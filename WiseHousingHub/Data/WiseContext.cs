@@ -31,7 +31,7 @@ namespace WiseHousingHub.Data
                 .HasForeignKey(p => p.LandlordId)
                 .IsRequired(false);
 
-            // Seed user data
+            // Seed admin account
             var adminUser = new ApplicationUser
             {
                 UserName = "admin@wisehousinghub.com",
@@ -51,7 +51,7 @@ namespace WiseHousingHub.Data
                 UserId = adminUser.Id
             });
 
-
+            // Seed user accounts
             var user1 = new ApplicationUser
             {
                 UserName = "johndoe@aol.com",
@@ -93,7 +93,7 @@ namespace WiseHousingHub.Data
                 UserId = user2.Id
             });
 
-
+            // Seed properties
             modelBuilder.Entity<Property>().HasData(
                 new Property()
                 {

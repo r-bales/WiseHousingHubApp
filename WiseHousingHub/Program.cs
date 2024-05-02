@@ -10,10 +10,20 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<WiseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WiseHousingHub")));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<WiseContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    // Configure identity settings
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Password.RequiredLength = 8;
+})
+ // Add role management
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<WiseContext>();
 
+// Register scoped instances of interfaces and implementations
 builder.Services.AddScoped<IPropertyRepository, PropertyRepository>();
 builder.Services.AddScoped<ILandlordRepository, LandlordRepository>();
 

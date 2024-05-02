@@ -12,6 +12,7 @@ namespace WiseHousingHub.Pages
         private IPropertyRepository propertyRepo;
         private ILandlordRepository landlordRepo;
 
+        // Constructor with dependency injections of propertyRepo and landlordRepo
         public LandlordDashboardModel(IPropertyRepository propertyRepository, ILandlordRepository landlordRepository)
         {
             this.propertyRepo = propertyRepository;
@@ -23,6 +24,8 @@ namespace WiseHousingHub.Pages
 
         [BindProperty]
         public ApplicationUser Landlord { get; set; }
+
+        // When page requested, get logged in user and their specific properties
         public async Task OnGetAsync()
         {
             Landlord = await landlordRepo.GetByIdAsync(userId);
