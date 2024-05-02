@@ -3,6 +3,8 @@ using System.Security.Permissions;
 
 namespace WiseHousingHub.Models
 {
+	// Represents a user in the application
+	// Extends IdentityUser for authentication
 	public class ApplicationUser : IdentityUser
 	{
 		public string FirstName { get; set; } = "";

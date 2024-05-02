@@ -10,7 +10,9 @@ namespace WiseHousingHub.Pages
     {
         private IPropertyRepository propertyRepo;
         private ILandlordRepository landlordRepo;
-        public MoreDetailsModel(IPropertyRepository propertyRepository, ILandlordRepository landlordRepository)
+
+		// Constructor with dependency injections of propertyRepo and landlordRepo
+		public MoreDetailsModel(IPropertyRepository propertyRepository, ILandlordRepository landlordRepository)
         {
             this.propertyRepo = propertyRepository;
             this.landlordRepo = landlordRepository;
@@ -22,6 +24,7 @@ namespace WiseHousingHub.Pages
         [BindProperty]
         public Property Property { get; set; }
         
+        // When page requested, get property and its landlord
         public async Task OnGetAsync()
         {
             Property = this.propertyRepo.GetById(Id);

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WiseHousingHub.Models
 {
+    // Represents a property listing in the application
     public class Property
     {
         [Required]
@@ -46,8 +47,5 @@ namespace WiseHousingHub.Models
         
         public ApplicationUser Landlord { get; set; }
         public bool IsVerified { get; set; } = false;
-
-
-
     }
 }

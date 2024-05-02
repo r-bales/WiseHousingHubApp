@@ -16,9 +16,10 @@ namespace WiseHousingHub.Pages
         {
             _logger = logger;
             this.propertyRepo = propertyRepo;
-        }
+		}
 
-        public void OnGet()
+        // When page requested, get all properties and store in list
+		public void OnGet()
         {
             Properties = propertyRepo.GetAll();
 
